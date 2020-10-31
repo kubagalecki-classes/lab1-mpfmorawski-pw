@@ -11,6 +11,7 @@ public:
 class Wektor2D
 {
 public:
+    Wektor2D() { std::cout << "Utworzenie pustego wektora! \n"; }
     Wektor2D(double vec_x, double vec_y)
     {
         x = vec_x;
@@ -26,44 +27,67 @@ public:
     double norm() { return sqrt(x * x + y * y); }
     void   print() { std::cout << norm() << "\n"; }
 
-    void setX(double vec_x) { x = vec_x; }
-    int  getX() { return x; };
-    void setY(double vec_y) { y = vec_y; }
-    int  getY() { return y; }
+    void   setX(double vec_x) { x = vec_x; }
+    double getX() { return x; };
+    void   setY(double vec_y) { y = vec_y; }
+    double getY() { return y; }
 
 private:
     double x;
     double y;
 };
 
+Wektor2D operator+(Wektor2D Vec1, Wektor2D Vec2)
+{
+    return Wektor2D{Vec1.getX() + Vec2.getX(), Vec1.getY() + Vec2.getY()};
+}
+
+double operator*(Wektor2D Vec1, Wektor2D Vec2)
+{
+    return ((Vec1.getX() * Vec2.getX()) + (Vec1.getY() * Vec2.getY()));
+}
+
 int main()
 {
-    Wektor2D Vector1{1., 1.};
-    // std::cout << "Vector1.x = " << Vector1.x << "  Vector1.y = " << Vector1.y << " \n";
-    std::cout << "Vector1.getX() = " << Vector1.getX() << " Vector1.getY() = " << Vector1.getY()
-              << " \n";
+    Wektor2D Vector1{1., 2.};
+    Wektor2D Vector2{3., 4.};
+    Wektor2D Vector3{};
 
-    Vector1.setX(2.);
-    std::cout << "Vector1.setX(2.); ";
-    Vector1.setY(2.);
-    std::cout << "Vector1.setY(2.); \n";
+    std::cout << "Oznaczone miejsce w kodzie 1\n";
+    Vector3 = Vector1 + Vector2;
+    std::cout << "Oznaczone miejsce w kodzie 2 \n";
 
-    // std::cout << "Vector1.x = " << Vector1.x << "  Vector1.y = " << Vector1.y << " \n";
-    std::cout << "Vector1.getX() = " << Vector1.getX() << " Vector1.getY() = " << Vector1.getY()
-              << " \n";
+    std::cout << "[" << Vector1.getX() << ", " << Vector1.getY() << "] + ";
+    std::cout << "[" << Vector2.getX() << ", " << Vector2.getY() << "] = ";
+    std::cout << "[" << Vector3.getX() << ", " << Vector3.getY() << "] \n";
 
-    std::cout << "Oznaczone miejsce w kodzie \n";
+    std::cout << "Oznaczone miejsce w kodzie 3\n";
+    double iloczSkalar = Vector1 * Vector2;
+    std::cout << "Oznaczone miejsce w kodzie 4 \n";
+
+    std::cout << "[" << Vector1.getX() << ", " << Vector1.getY() << "] * ";
+    std::cout << "[" << Vector2.getX() << ", " << Vector2.getY() << "] = ";
+    std::cout << iloczSkalar << " \n";
 }
 
 /*
-Po wykonaniu kodu z odkomentowanymi linijkami zawierającymi Vector1.x oraz Vector1.y nie udało się
-skompilować.
-
-Po wykonaniu kodu otrzymano:
-  Wektor o wspolrzednych x = 1 y = 1 został utworzony! 
-  Vector1.getX() = 1 Vector1.getY() = 1 
-  Vector1.setX(2.); Vector1.setY(2.); 
-  Vector1.getX() = 2 Vector1.getY() = 2 
-  Oznaczone miejsce w kodzie 
-  Wektor o wspolrzednych x = 2 y = 2 został usuniety! 
+Po wykonaniu otrzymano:
+  Wektor o wspolrzednych x = 1 y = 2 został utworzony! 
+  Wektor o wspolrzednych x = 3 y = 4 został utworzony! 
+  Utworzenie pustego wektora! 
+  Oznaczone miejsce w kodzie 1
+  Wektor o wspolrzednych x = 4 y = 6 został utworzony! 
+  Wektor o wspolrzednych x = 4 y = 6 został usuniety! 
+  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
+  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
+  Oznaczone miejsce w kodzie 2 
+  [1, 2] + [3, 4] = [4, 6] 
+  Oznaczone miejsce w kodzie 3
+  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
+  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
+  Oznaczone miejsce w kodzie 4 
+  [1, 2] * [3, 4] = 11 
+  Wektor o wspolrzednych x = 4 y = 6 został usuniety! 
+  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
+  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
 */
