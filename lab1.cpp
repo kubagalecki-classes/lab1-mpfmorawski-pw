@@ -32,6 +32,8 @@ public:
         --num_wek;
     }
 
+    static int populacja() { return num_wek; }
+
     double norm() { return sqrt(x * x + y * y); }
     void   print() { std::cout << norm() << "\n"; }
 
@@ -71,27 +73,39 @@ int main()
 {
 
     Wektor2D Vector1{1., 1.};
+    std::cout << Wektor2D::populacja() << std::endl;
     Wektor2D Vector2{2., 2.};
+    std::cout << Wektor2D::populacja() << std::endl;
     Wektor2D Vector3{};
+    std::cout << Wektor2D::populacja() << std::endl;
     {
         Wektor2D Vector4{4., 4.};
+        std::cout << Wektor2D::populacja() << std::endl;
         Wektor2D Vector5{};
+        std::cout << Wektor2D::populacja() << std::endl;
     }
     Wektor2D Vector6{6., 6.};
+    std::cout << Wektor2D::populacja() << std::endl;
 }
 
 /*
 Po wykonaniu otrzymano:
-  Wektor nr 1 o wspolrzednych x = 1 y = 1 został utworzony!
-  Wektor nr 2 o wspolrzednych x = 2 y = 2 został utworzony!
-  Wektor nr 3 został utworzony!
-  Wektor nr 4 o wspolrzednych x = 4 y = 4 został utworzony!
-  Wektor nr 5 został utworzony!
-  Wektor nr 5 o wspolrzednych x = 6.91837e-310 y = 0 został usuniety!
+  Wektor nr 1 o wspolrzednych x = 1 y = 1 został utworzony! 
+  1
+  Wektor nr 2 o wspolrzednych x = 2 y = 2 został utworzony! 
+  2
+  Wektor nr 3 został utworzony! 
+  3
+  Wektor nr 4 o wspolrzednych x = 4 y = 4 został utworzony! 
+  4
+  Wektor nr 5 został utworzony! 
+  5
+  Wektor nr 5 o wspolrzednych x = 6.9141e-310 y = 0 został usuniety!
   Wektor nr 4 o wspolrzednych x = 4 y = 4 został usuniety!
-  Wektor nr 4 o wspolrzednych x = 6 y = 6 został utworzony!
+  Wektor nr 4 o wspolrzednych x = 6 y = 6 został utworzony! 
+  4
   Wektor nr 4 o wspolrzednych x = 6 y = 6 został usuniety!
-  Wektor nr 3 o wspolrzednych x = 6.95285e-310 y = 4.67546e-310 został usuniety!
+  Wektor nr 3 o wspolrzednych x = 6.95293e-310 y = 4.67276e-310 został usuniety!
   Wektor nr 2 o wspolrzednych x = 2 y = 2 został usuniety!
   Wektor nr 1 o wspolrzednych x = 1 y = 1 został usuniety!
 */
