@@ -35,6 +35,8 @@ public:
 private:
     double x;
     double y;
+
+    friend std::ostream& operator<<(std::ostream& os, const Wektor2D& Vector);
 };
 
 Wektor2D operator+(Wektor2D Vec1, Wektor2D Vec2)
@@ -47,47 +49,26 @@ double operator*(Wektor2D Vec1, Wektor2D Vec2)
     return ((Vec1.getX() * Vec2.getX()) + (Vec1.getY() * Vec2.getY()));
 }
 
+std::ostream& operator<<(std::ostream& os, const Wektor2D& Vector)
+{
+    os << "[" << Vector.x << ", " << Vector.y << "] ";
+    return os;
+}
+
 int main()
 {
     Wektor2D Vector1{1., 2.};
     Wektor2D Vector2{3., 4.};
-    Wektor2D Vector3{};
-
-    std::cout << "Oznaczone miejsce w kodzie 1\n";
-    Vector3 = Vector1 + Vector2;
-    std::cout << "Oznaczone miejsce w kodzie 2 \n";
-
-    std::cout << "[" << Vector1.getX() << ", " << Vector1.getY() << "] + ";
-    std::cout << "[" << Vector2.getX() << ", " << Vector2.getY() << "] = ";
-    std::cout << "[" << Vector3.getX() << ", " << Vector3.getY() << "] \n";
-
-    std::cout << "Oznaczone miejsce w kodzie 3\n";
-    double iloczSkalar = Vector1 * Vector2;
-    std::cout << "Oznaczone miejsce w kodzie 4 \n";
-
-    std::cout << "[" << Vector1.getX() << ", " << Vector1.getY() << "] * ";
-    std::cout << "[" << Vector2.getX() << ", " << Vector2.getY() << "] = ";
-    std::cout << iloczSkalar << " \n";
+    std::cout << "Oznaczone miejsce w kodzie \n";
+    std::cout << Vector1 << Vector2 << "\n";
 }
 
 /*
 Po wykonaniu otrzymano:
   Wektor o wspolrzednych x = 1 y = 2 został utworzony! 
   Wektor o wspolrzednych x = 3 y = 4 został utworzony! 
-  Utworzenie pustego wektora! 
-  Oznaczone miejsce w kodzie 1
-  Wektor o wspolrzednych x = 4 y = 6 został utworzony! 
-  Wektor o wspolrzednych x = 4 y = 6 został usuniety! 
-  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
-  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
-  Oznaczone miejsce w kodzie 2 
-  [1, 2] + [3, 4] = [4, 6] 
-  Oznaczone miejsce w kodzie 3
-  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
-  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
-  Oznaczone miejsce w kodzie 4 
-  [1, 2] * [3, 4] = 11 
-  Wektor o wspolrzednych x = 4 y = 6 został usuniety! 
+  Oznaczone miejsce w kodzie 
+  [1, 2] [3, 4] 
   Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
   Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
 */
