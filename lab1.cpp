@@ -1,5 +1,5 @@
+#include <cmath>
 #include <iostream>
-#include <math.h>
 
 class Informer
 {
@@ -16,14 +16,6 @@ public:
         ++num_wek;
         std::cout << "Wektor nr " << num_wek << " został utworzony! \n";
     }
-    Wektor2D(double vec_x, double vec_y)
-    {
-        x = vec_x;
-        y = vec_y;
-        ++num_wek;
-        std::cout << "Wektor nr " << num_wek << " o wspolrzednych x = " << x << " y = " << y
-                  << " został utworzony! \n";
-    }
 
     ~Wektor2D()
     {
@@ -32,7 +24,17 @@ public:
         --num_wek;
     }
 
-    static int populacja() { return num_wek; }
+    static Wektor2D kart(double kart_x, double kart_y)
+    {
+        Wektor2D Vector_kart{kart_x, kart_y};
+        return Vector_kart;
+    }
+
+    static Wektor2D bieg(double bieg_r, double bieg_fi)
+    {
+        Wektor2D Vector_bieg{bieg_r * cos(bieg_fi), bieg_r * sin(bieg_fi)};
+        return Vector_bieg;
+    }
 
     double norm() { return sqrt(x * x + y * y); }
     void   print() { std::cout << norm() << "\n"; }
@@ -49,17 +51,16 @@ private:
     double y;
 
     friend std::ostream& operator<<(std::ostream& os, const Wektor2D& Vector);
+
+    Wektor2D(double vec_x, double vec_y)
+    {
+        x = vec_x;
+        y = vec_y;
+        ++num_wek;
+        std::cout << "Wektor nr " << num_wek << " o wspolrzednych x = " << x << " y = " << y
+                  << " został utworzony! \n";
+    }
 };
-
-Wektor2D operator+(Wektor2D Vec1, Wektor2D Vec2)
-{
-    return Wektor2D{Vec1.getX() + Vec2.getX(), Vec1.getY() + Vec2.getY()};
-}
-
-double operator*(Wektor2D Vec1, Wektor2D Vec2)
-{
-    return ((Vec1.getX() * Vec2.getX()) + (Vec1.getY() * Vec2.getY()));
-}
 
 std::ostream& operator<<(std::ostream& os, const Wektor2D& Vector)
 {
@@ -71,41 +72,14 @@ int Wektor2D::num_wek = 0;
 
 int main()
 {
-
-    Wektor2D Vector1{1., 1.};
-    std::cout << Wektor2D::populacja() << std::endl;
-    Wektor2D Vector2{2., 2.};
-    std::cout << Wektor2D::populacja() << std::endl;
-    Wektor2D Vector3{};
-    std::cout << Wektor2D::populacja() << std::endl;
-    {
-        Wektor2D Vector4{4., 4.};
-        std::cout << Wektor2D::populacja() << std::endl;
-        Wektor2D Vector5{};
-        std::cout << Wektor2D::populacja() << std::endl;
-    }
-    Wektor2D Vector6{6., 6.};
-    std::cout << Wektor2D::populacja() << std::endl;
+    Wektor2D Vector1 = Wektor2D::kart(1., 1.);
+    Wektor2D Vector2 = Wektor2D::bieg(1., 1.);
 }
 
 /*
 Po wykonaniu otrzymano:
-  Wektor nr 1 o wspolrzednych x = 1 y = 1 został utworzony! 
-  1
-  Wektor nr 2 o wspolrzednych x = 2 y = 2 został utworzony! 
-  2
-  Wektor nr 3 został utworzony! 
-  3
-  Wektor nr 4 o wspolrzednych x = 4 y = 4 został utworzony! 
-  4
-  Wektor nr 5 został utworzony! 
-  5
-  Wektor nr 5 o wspolrzednych x = 6.9141e-310 y = 0 został usuniety!
-  Wektor nr 4 o wspolrzednych x = 4 y = 4 został usuniety!
-  Wektor nr 4 o wspolrzednych x = 6 y = 6 został utworzony! 
-  4
-  Wektor nr 4 o wspolrzednych x = 6 y = 6 został usuniety!
-  Wektor nr 3 o wspolrzednych x = 6.95293e-310 y = 4.67276e-310 został usuniety!
-  Wektor nr 2 o wspolrzednych x = 2 y = 2 został usuniety!
+  Wektor nr 1 o wspolrzednych x = 1 y = 1 został utworzony!
+  Wektor nr 2 o wspolrzednych x = 0.540302 y = 0.841471 został utworzony!
+  Wektor nr 2 o wspolrzednych x = 0.540302 y = 0.841471 został usuniety!
   Wektor nr 1 o wspolrzednych x = 1 y = 1 został usuniety!
 */
