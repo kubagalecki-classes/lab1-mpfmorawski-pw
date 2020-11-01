@@ -11,17 +11,25 @@ public:
 class Wektor2D
 {
 public:
-    Wektor2D() { std::cout << "Utworzenie pustego wektora! \n"; }
+    Wektor2D()
+    {
+        ++num_wek;
+        std::cout << "Wektor nr " << num_wek << " został utworzony! \n";
+    }
     Wektor2D(double vec_x, double vec_y)
     {
         x = vec_x;
         y = vec_y;
-        std::cout << "Wektor o wspolrzednych x = " << x << " y = " << y << " został utworzony! \n";
+        ++num_wek;
+        std::cout << "Wektor nr " << num_wek << " o wspolrzednych x = " << x << " y = " << y
+                  << " został utworzony! \n";
     }
 
     ~Wektor2D()
     {
-        std::cout << "Wektor o wspolrzednych x = " << x << " y = " << y << " został usuniety! \n";
+        std::cout << "Wektor nr " << num_wek << " o wspolrzednych x = " << x << " y = " << y
+                  << " został usuniety!\n";
+        --num_wek;
     }
 
     double norm() { return sqrt(x * x + y * y); }
@@ -33,6 +41,8 @@ public:
     double getY() { return y; }
 
 private:
+    static int num_wek;
+
     double x;
     double y;
 
@@ -55,20 +65,33 @@ std::ostream& operator<<(std::ostream& os, const Wektor2D& Vector)
     return os;
 }
 
+int Wektor2D::num_wek = 0;
+
 int main()
 {
-    Wektor2D Vector1{1., 2.};
-    Wektor2D Vector2{3., 4.};
-    std::cout << "Oznaczone miejsce w kodzie \n";
-    std::cout << Vector1 << Vector2 << "\n";
+
+    Wektor2D Vector1{1., 1.};
+    Wektor2D Vector2{2., 2.};
+    Wektor2D Vector3{};
+    {
+        Wektor2D Vector4{4., 4.};
+        Wektor2D Vector5{};
+    }
+    Wektor2D Vector6{6., 6.};
 }
 
 /*
 Po wykonaniu otrzymano:
-  Wektor o wspolrzednych x = 1 y = 2 został utworzony! 
-  Wektor o wspolrzednych x = 3 y = 4 został utworzony! 
-  Oznaczone miejsce w kodzie 
-  [1, 2] [3, 4] 
-  Wektor o wspolrzednych x = 3 y = 4 został usuniety! 
-  Wektor o wspolrzednych x = 1 y = 2 został usuniety! 
+  Wektor nr 1 o wspolrzednych x = 1 y = 1 został utworzony!
+  Wektor nr 2 o wspolrzednych x = 2 y = 2 został utworzony!
+  Wektor nr 3 został utworzony!
+  Wektor nr 4 o wspolrzednych x = 4 y = 4 został utworzony!
+  Wektor nr 5 został utworzony!
+  Wektor nr 5 o wspolrzednych x = 6.91837e-310 y = 0 został usuniety!
+  Wektor nr 4 o wspolrzednych x = 4 y = 4 został usuniety!
+  Wektor nr 4 o wspolrzednych x = 6 y = 6 został utworzony!
+  Wektor nr 4 o wspolrzednych x = 6 y = 6 został usuniety!
+  Wektor nr 3 o wspolrzednych x = 6.95285e-310 y = 4.67546e-310 został usuniety!
+  Wektor nr 2 o wspolrzednych x = 2 y = 2 został usuniety!
+  Wektor nr 1 o wspolrzednych x = 1 y = 1 został usuniety!
 */
